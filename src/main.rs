@@ -1,27 +1,32 @@
 use macroquad::prelude::*;
 use std::time::Instant;
 
+
 #[macroquad::main("MyGame")]
 async fn main() {
+    const FORCE_OF_GRAVITY: f32 = 2.0;
+
     let mut x_pos = (screen_width() / 2.0) - 60.0;
     let mut y_pos = 100.0;
     loop {
         // Handle inputs
         if is_key_down(KeyCode::Right) {
-            x_pos += 1.0;
+            x_pos += 5.0;
         }
 
         if is_key_down(KeyCode::Left) {
-            x_pos -= 1.0;
-        }
-
-        if is_key_down(KeyCode::Up) {
-            y_pos -= 1.0;
+            x_pos -= 5.0;
         }
 
         if is_key_down(KeyCode::Down) {
-            y_pos += 1.0;
+            y_pos += 5.0;
         }
+
+        if is_key_down(KeyCode::Space) {
+            y_pos -= 15.0;
+        }
+
+        y_pos += FORCE_OF_GRAVITY;
 
         let start = Instant::now();
         clear_background(BLACK);
